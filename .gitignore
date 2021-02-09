@@ -1,8 +1,8 @@
 *.zip
-/extract/test/*
-/extract/train/*
-/output
 .DS_Store
-model.json
-model.h5
-/result/*.png
+*.json
+*.h5
+
+#Beta Files
+Beta_Implementation/*.png
+Beta_Implementation/*.jpg
