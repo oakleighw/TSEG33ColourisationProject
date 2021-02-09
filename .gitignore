@@ -5,4 +5,4 @@
 .DS_Store
 model.json
 model.h5
-result/*.png
+/result/*.png
