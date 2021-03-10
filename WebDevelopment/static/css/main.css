@@ -1,0 +1,30 @@
+.navbar {
+    min-height: 4em;
+    background-color: #fffaea;
+    margin-bottom: 0;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+}
+
+.uploader {
+    margin: auto;
+    width: 20%;
+    border: 1px solid black;
+    padding: 10px
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+    height: auto;
+    background-color: #ffffff;
+    font-family: 'arial';
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
