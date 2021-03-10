@@ -1,7 +1,9 @@
 *.zip
-.DS_Store
+*.DS_Store
 *.json
 *.h5
+
+#Alpha_Implementation Files
 
 #Beta_Implementation Files
 Beta_Implementation/result/*
@@ -17,4 +19,5 @@ Full_Implementation/output/*
 Full_Implementation_v2/result/*
 Full_Implementation_v2/Dataset/*
 
+#WebDevelopment Files
 
