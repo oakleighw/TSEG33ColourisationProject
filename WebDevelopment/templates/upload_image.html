@@ -6,12 +6,10 @@
 
 {% block main %}
 
-<div class="container">
+<div class="upload-container">
     <div class="row">
+        <h1>Upload Image</h1>
         <div class="col">
-
-            <h1>Upload Image</h1>
-            <hr>
 
             <form action="/upload-image" method="POST" enctype="multipart/form-data">
             
@@ -19,16 +17,16 @@
                     <label>Select image</label>
                     <div class="custom-file">
                         <input oninput="filesize(this);" type="file" class="custom-file-input" name="image" id="image">
-                        <label class="custom-file-label" for="image">Select image...</label>
                     </div>
 
-                <button type="submit" class="btn btn-primary">Upload</button>
+                <button type="submit" class="uploadbtn">Upload</button>
 
             </form>
-
         </div>
     </div>
 </div>
+
+<div class="terms">Files must be below 20mb. PNG, JPEG or JPG only. Extra Terms here, add example images?</div>
 
 {% endblock %}
 
