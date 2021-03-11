@@ -8,6 +8,24 @@
     {% block head %}{% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
+    <header>
+      <div class="container">
+
+        <img src="static/public/images/logo/logo_small.png" alt="logo" class="logo">
+
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/upload-image">Upload</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </nav>
+
+      </div>
+    </header>
+    <main>
+      {% block main %}{% endblock %}
+    </main>
+    {% block script %}{% endblock %}
   </body>
 </html>
