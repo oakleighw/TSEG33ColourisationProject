@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-app.config["IMAGE_UPLOADS"] = "C:/Users/olive/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
+app.config["IMAGE_UPLOADS"] = "/Users/oliver/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
 app.config["IMAGE_FILETYPES"] = ["PNG", "JPG", "JPEG"]
 app.config["MAX_FILESIZE"] = 20971520 #20mb
 
