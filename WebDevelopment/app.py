@@ -9,7 +9,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-app.config["IMAGE_UPLOADS"] = "/Users/oliver/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
+app.config["IMAGE_UPLOADS"] = "C:/Users/olive/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
 app.config["IMAGE_FILETYPES"] = ["PNG", "JPG", "JPEG"]
 app.config["MAX_FILESIZE"] = 20971520 #20mb
 
@@ -25,7 +25,7 @@ def imageExtensionCheck(filename):
         return False
 
 def imageFileSize(filesize):
-    if int(filesize) <= app.config["MAX_FILESIZE"]:
+    if int(str(filesize)) <= app.config["MAX_FILESIZE"]:
         return True
     else:
         return False
@@ -37,14 +37,14 @@ def upload_image():
         
         if request.files:
 
-            if not imageFileSize(request.cookies.get("filesize")):
-                print("File exceeded "+ (str(int(app.config["MAX_FILESIZE"])/1024**2)+"mb."))
-                return redirect(request.url)
-
             image = request.files["image"]
 
             if image.filename == "":
                 print("Image must have a filename.")
+                return redirect(request.url)
+            
+            if not imageFileSize(request.cookies.get("filesize")):
+                print("File exceeded "+ (str(int(app.config["MAX_FILESIZE"])/1024**2)+"mb."))
                 return redirect(request.url)
 
             if not imageExtensionCheck(image.filename):
