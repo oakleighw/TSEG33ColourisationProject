@@ -63,7 +63,10 @@ nav li {
     position: relative;
 }
 
-
+.uploadbtn {
+    float: right;
+    transform: translateY(-100%);
+}
 .titletext{
     font-size: 3em;
     margin: 0;
@@ -80,4 +83,26 @@ nav li {
     height: 50px;
     width: auto;
     float: left;
+}
+
+.row {
+    padding: 100px;
+    background-image: url(../img/uploads/test.jpeg);
+    background-position-y: center;
+    background-size: cover;
+}
+
+.col {
+    margin: auto;
+    width: 30%;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px
+}
+.row h1 {
+    text-align: center;
+}
+
+.form-group label {
+margin-left: 40%;
 }
