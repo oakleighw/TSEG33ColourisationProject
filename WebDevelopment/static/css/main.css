@@ -5,15 +5,14 @@ header {
     border-bottom: none;
     display: flex;
     align-items: center;
-    filter: drop-shadow(0 0 0.75rem black);
 }
 
-body {
+body{
     padding: 0;
     margin: 0;
     max-width: 100%;
     height: auto;
-    background-color: #febd32;
+    background-color: #f0f0f0;
     font-family: 'arial';
 }
 
@@ -86,10 +85,12 @@ nav li {
 }
 
 .row {
+    color: white;
     padding: 100px;
-    background-image: url(../img/uploads/test.jpeg);
-    background-position-y: center;
+    background-image: url(../public/images/upload-bg.jpg);
+    background-position-y: -60%;
     background-size: cover;
+
 }
 
 .col {
@@ -105,4 +106,11 @@ nav li {
 
 .form-group label {
 margin-left: 40%;
+}
+
+.resultimage {
+    float: start;
+    border: 0;
+    padding: 0;
+    margin-left: 43%;
 }
