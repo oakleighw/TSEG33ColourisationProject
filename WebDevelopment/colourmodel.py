@@ -1,16 +1,8 @@
 from keras.preprocessing.image import ImageDataGenerator, array_to_img, img_to_array, load_img
 from skimage.color import rgb2lab, lab2rgb, rgb2gray
 from skimage.io import imsave
-from random import randint
 import numpy as np
 import os
-
-import tensorflow as tf
-from keras.layers import Conv2D, Conv2DTranspose, UpSampling2D
-from keras.layers import Activation, Dense, Dropout, Flatten, InputLayer
-from keras.layers.normalization import BatchNormalization
-from keras.callbacks import TensorBoard, ModelCheckpoint
-from keras.models import Sequential
 
 # Load .JSON and create model
 from keras.models import model_from_json
@@ -35,8 +27,6 @@ def conversion(filename):
     # Test model
     output = loaded_model.predict(colorize)
     output = output * 128
-
-    row = 0
 
     # Output colorizations
     for i in range(len(output)):
