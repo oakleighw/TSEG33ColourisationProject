@@ -1,9 +1,8 @@
 *.zip
 *.DS_Store
-*.json
-*.h5
 *.idea
 *__pycache__
+
 #Alpha_Implementation Files
 
 #Beta_Implementation Files
