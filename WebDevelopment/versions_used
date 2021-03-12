@@ -6,4 +6,4 @@ MODULES INSTALLED USING PYCHARM VIRTUALENV ENVIRONMENT
 - Flask
 - scikit-image
 - Keras
-- tensorflow
+- tensorflow //Not actually needed
