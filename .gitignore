@@ -2,6 +2,7 @@
 *.DS_Store
 *.idea
 *__pycache__
+*.vscode
 
 #Alpha_Implementation Files
 
@@ -20,4 +21,3 @@ Full_Implementation_v2/result/*
 Full_Implementation_v2/Dataset/*
 
 #WebDevelopment Files
-
