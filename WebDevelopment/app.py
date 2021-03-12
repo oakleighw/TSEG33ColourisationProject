@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import os
 from werkzeug.utils import secure_filename
+import colourmodel
 
 
 app = Flask(__name__)
@@ -9,7 +10,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-app.config["IMAGE_UPLOADS"] = "/Users/oliver/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
+app.config["IMAGE_UPLOADS"] = "C:/Users/olive/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
 app.config["IMAGE_FILETYPES"] = ["PNG", "JPG", "JPEG"]
 app.config["MAX_FILESIZE"] = 20971520 #20mb
 
@@ -57,6 +58,8 @@ def upload_image():
             image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
             
             print("Image saved")
+
+            colourmodel.conversion(filename)
 
             return redirect(request.url)
 
