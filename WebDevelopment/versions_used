@@ -3,7 +3,7 @@ Python version --Python 3.6
 ======================================================
 MODULES INSTALLED USING PYCHARM VIRTUALENV ENVIRONMENT
 ======================================================
+
 - Flask
 - scikit-image
 - Keras
-- tensorflow //Not actually needed
