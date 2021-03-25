@@ -1,71 +1,103 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request
+import secrets
 import os
-from werkzeug.utils import secure_filename
 import colourmodel
+import base64
+import urllib.request
 
+__DIR__ = os.path.dirname(__file__)
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
-app.config["IMAGE_UPLOADS"] = "C:/Users/olive/Documents/GitHub/Team Software Development Project/WebDevelopment/static/img/uploads"
+
+app.config["IMAGE_UPLOADS"] = os.path.join(__DIR__, "static/img/uploads")
 app.config["IMAGE_FILETYPES"] = ["PNG", "JPG", "JPEG"]
-app.config["MAX_FILESIZE"] = 20971520 #20mb
+
 
 def imageExtensionCheck(filename):
-    if not "." in filename:
+    if "." not in filename:
         return False
     extension = filename.rsplit(".", 1)[1]
 
     if extension.upper() in app.config["IMAGE_FILETYPES"]:
-        return True
-    
+        return extension
+
     else:
         return False
 
-def imageFileSize(filesize):
-    if int(str(filesize)) <= app.config["MAX_FILESIZE"]:
-        return True
-    else:
-        return False
 
 @app.route('/upload-image', methods=["GET", "POST"])
 def upload_image():
-
     if request.method == "POST":
-        
-        if request.files:
 
-            image = request.files["image"]
+        if request.form['request'] == "upload" or request.form['request'] == "url":
 
-            if image.filename == "":
-                print("Image must have a filename.")
-                return redirect(request.url)
-            
-            if not imageFileSize(request.cookies.get("filesize")):
-                print("File exceeded "+ (str(int(app.config["MAX_FILESIZE"])/1024**2)+"mb."))
-                return redirect(request.url)
+            if request.form['request'] == "upload":
+                if 'file' not in request.files:
+                    error = "No image has been selected."
+                    return {"error": error}
 
-            if not imageExtensionCheck(image.filename):
-                print("Image must be of the filetype: .jpg, .jpeg or .png")
-                return redirect(request.url)
+                image = request.files["file"]
 
-            else:
-                filename = secure_filename(image.filename)
+                if image.filename == "":
+                    error = "Image must have a filename."
+                    return {"error": error}
 
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-            
-            print("Image saved")
+                if not imageExtensionCheck(image.filename):
+                    error = "Image must be of the filetype: .jpg, .jpeg or .png"
+                    return {"error": error}
 
-            colourmodel.conversion(filename)
+                extension = imageExtensionCheck(image.filename)
 
-            return redirect(request.url)
+                filename = secrets.token_hex(nbytes=16) + "." + extension
+                print("Generated filename : " + filename)
 
-    return render_template('upload_image.html')
+                image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                print("Save complete")
+            else :
+                try:
+                    image = urllib.request.urlopen(request.form['url'])
+                except:
+                    error = "That image doesn't exist or cannot be read"
+                    return {"error": error}
 
+                if not imageExtensionCheck(request.form['url']):
+                    error = "Image must be of the filetype: .jpg, .jpeg or .png"
+                    return {"error": error}
 
+                extension = imageExtensionCheck(request.form['url'])
+
+                filename = secrets.token_hex(nbytes=16) + "." + extension
+                print("Generated filename : " + filename)
+
+                output = open(os.path.join(app.config["IMAGE_UPLOADS"], filename), "wb")
+                output.write(image.read())
+                output.close()
+
+                print("Save complete")
+
+            converted_path = colourmodel.conversion(filename)
+            converted_image = open(os.path.join(__DIR__, converted_path), 'rb')
+
+            after_string = base64.encodebytes(converted_image.read()).decode('utf-8')
+
+            print("Conversion complete")
+
+            return {"response": True, "after": after_string, "url": converted_path, "filename": filename}
+
+        else:
+            error = "Invalid upload type."
+            return {"error": error}
+
+    else:
+
+        error = "Must be a POST request"
+        return {"error": error}
 
 
 if __name__ == "__main__":
