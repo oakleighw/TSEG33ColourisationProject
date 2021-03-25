@@ -10,6 +10,13 @@ __DIR__ = os.path.dirname(__file__)
 app = Flask(__name__)
 
 
+# Create directories
+if not os.path.exists(os.path.join(__DIR__, "static/img/uploads")):
+    os.makedirs(os.path.join(__DIR__, "static/img/uploads"))
+if not os.path.exists(os.path.join(__DIR__, "static/img/converted")):
+    os.makedirs(os.path.join(__DIR__, "static/img/converted"))
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
